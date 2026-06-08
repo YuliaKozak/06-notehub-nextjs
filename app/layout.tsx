@@ -1,5 +1,6 @@
 // app/layout.tsx
 import Header from "@/src/components/Header/Header";
+import Footer from "@/src/components/Footer/Footer";
 import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
@@ -25,11 +26,7 @@ export default function RootLayout({
         <TanStackProvider>
           <Header />
           <main>{children}</main>
-          <footer>
-            <p>
-              Created <time dateTime="2025">2025</time>
-            </p>
-          </footer>
+          <Footer />
         </TanStackProvider>
       </body>
     </html>
