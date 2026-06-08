@@ -1,3 +1,4 @@
+"use client";
 import css from "./Pagination.module.css";
 
 import type { ComponentType } from "react";

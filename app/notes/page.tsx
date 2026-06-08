@@ -1,36 +1,29 @@
 // app/notes/page.tsx
 
-import NoteList from "@/src/components/NoteList/NoteList";
-import { getNotes } from "@/src/lib/api";
+//const response = await getNotes();
 
-const Notes = async () => {
-  const response = await getNotes();
-
-  return (
-    <section>
-      <h1>Notes List</h1>
-      {response?.notes?.length > 0 && <NoteList notes={response.notes} />}
-    </section>
-  );
-};
-
-export default Notes;
+//return (
+//<section>
+//<h1>Notes List</h1>
+//{response?.notes?.length > 0 && <NoteList notes={response.notes} />}
+//</section>
 
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 
-import Modal from "../Modal/Modal";
-import NoteForm from "../NoteForm/NoteForm";
-import NoteList from "../NoteList/NoteList";
-import Pagination from "../Pagination/Pagination";
-import SearchBox from "../SearchBox/SearchBox";
-import { fetchNotes } from "..//../services/noteService";
+import Modal from "../../src/components/Modal/Modal";
+import NoteForm from "../../src/components/NoteForm/NoteForm";
+import NoteList from "../../src/components/NoteList/NoteList";
+import Pagination from "../../src/components/Pagination/Pagination";
+import SearchBox from "../../src/components/SearchBox/SearchBox";
+import { fetchNotes } from "../../src/lib/api";
+//import { getNotes } from "@/src/lib/api";
 //import { type Note } from "..//../types/note";
 
 import css from "./App.module.css";
 
-function App() {
+function Notes() {
   const [page, setPage] = useState<number>(1);
 
   const [search, setSearch] = useState<string>("");
@@ -89,4 +82,4 @@ function App() {
   );
 }
 
-export default App;
+export default Notes;

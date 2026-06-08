@@ -1,9 +1,10 @@
+"use client";
 import css from "./NoteForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 // Імпортуємо функцію та її тип даних
-import { createNote, type CreateNoteData } from "../../services/noteService";
+import { createNote, type CreateNoteData } from "../../lib/api";
 
 interface NoteFormProps {
   onClose: () => void;
