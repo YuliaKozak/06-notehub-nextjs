@@ -3,6 +3,7 @@ import css from "./NoteList.module.css";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteNote } from "../../lib/api";
+import Link from "next/link";
 
 interface NoteListProps {
   notes: Note[];
@@ -30,6 +31,10 @@ function NoteList({ notes }: NoteListProps) {
               <span className={css.tag}>{note.tag}</span>
 
               {/* Кнопка на своєму законному місці, тут вона бачить конкретний note.id */}
+              <Link href={`/notes/${note.id}`} className={css.link}>
+                View details
+              </Link>
+
               <button
                 className={css.button}
                 onClick={() => mutation.mutate(note.id)}

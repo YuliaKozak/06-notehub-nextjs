@@ -11,7 +11,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { fetchNotes } from "@/lib/api";
 
-import css from "@/app/Home.module.css";
+import css from "@/app/notes/NotesPage.module.css";
 
 export default function NotesClient() {
   const [page, setPage] = useState<number>(1);
