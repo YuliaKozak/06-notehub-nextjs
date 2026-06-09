@@ -3,39 +3,29 @@
 import axios from "axios";
 import type { Note } from "../types/note";
 
-export type NoteListResponse = {
-  notes: Note[];
-  total: number;
-};
-
-axios.defaults.baseURL = "https://next-v1-notes-api.goit.study";
-
-export const getNotes = async () => {
-  const res = await axios.get<NoteListResponse>("/notes");
-  return res.data;
-};
-
-export const getSingleNote = async (id: string) => {
-  const res = await axios.get<Note>(`/notes/${id}`);
-  return res.data;
-};
-
-interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-}
+export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
 export interface CreateNoteData {
   title: string;
   content: string;
-  tag: string;
+  tag: NoteTag;
 }
 
-const noteInstance = axios.create({
+export interface FetchNotesResponse {
+  notes: Note[];
+  totalPages: number;
+}
+
+export const noteInstance = axios.create({
   baseURL: "https://next-v1-notes-api.goit.study",
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
-  },
+});
+
+noteInstance.interceptors.request.use((config) => {
+  const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export const fetchNotes = async (
@@ -48,8 +38,18 @@ export const fetchNotes = async (
   return response.data;
 };
 
+export const fetchSingleNote = async (id: string): Promise<Note> => {
+  const response = await noteInstance.get<Note>(`/notes/${id}`);
+  return response.data;
+};
+
 export const createNote = async (noteData: CreateNoteData): Promise<Note> => {
-  const response = await noteInstance.post<Note>("/notes", noteData);
+  const formattedData = {
+    ...noteData,
+    tag: noteData.tag.toLowerCase() as NoteTag,
+  };
+
+  const response = await noteInstance.post<Note>("/notes", formattedData);
   return response.data;
 };
 
