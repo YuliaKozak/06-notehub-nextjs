@@ -3,16 +3,6 @@
 import axios from "axios";
 import type { Note } from "../types/note";
 
-export type Note = {
-  id: string;
-  title: string;
-  content: string;
-  categoryId: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type NoteListResponse = {
   notes: Note[];
   total: number;
@@ -29,8 +19,6 @@ export const getSingleNote = async (id: string) => {
   const res = await axios.get<Note>(`/notes/${id}`);
   return res.data;
 };
-
-//import type { Note } from "../types/note";
 
 interface FetchNotesResponse {
   notes: Note[];
