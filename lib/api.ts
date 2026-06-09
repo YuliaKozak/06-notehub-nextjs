@@ -44,12 +44,7 @@ export const fetchSingleNote = async (id: string): Promise<Note> => {
 };
 
 export const createNote = async (noteData: CreateNoteData): Promise<Note> => {
-  const formattedData = {
-    ...noteData,
-    tag: noteData.tag.toLowerCase() as NoteTag,
-  };
-
-  const response = await noteInstance.post<Note>("/notes", formattedData);
+  const response = await noteInstance.post<Note>("/notes", noteData);
   return response.data;
 };
 
